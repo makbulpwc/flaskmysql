@@ -1,0 +1,102 @@
+<html>
+<head>
+
+
+</head>
+<body>
+<style type="text/css">
+
+h1 {
+    border: 3px solid black;
+    border-radius: 10px;    
+    height: 90px;
+    font-size: 35px;
+    line-height: 90px; 
+    font-weight: bold;
+    margin-bottom: 0 !important;   
+    text-align: center;
+    padding-right: 200px;   
+    
+}
+
+.buttons button { 
+  width: 20%;
+}
+
+
+img {
+  border-radius: 200px;
+  margin-left: 4px;
+  margin-bottom: 10px;
+  margin-top: 8px;
+
+}
+
+body {background-color:white}
+
+.success {
+  
+  border: none;
+  color:black;
+  padding: 15px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid black;
+  background-color:rgb(231,230,230);
+
+
+}
+
+</style>
+
+<div> <img src="../static/pwclogo.png" alt="pwc logo" width="130" height="85" align="left" /> <h1> CRM Use cases</h1> </div>
+<!-- <h1> <img src="../static/pwclogo.png"  alt="PWC LOGO"  width="130" height="90" />  CRM Use cases </h1> -->
+
+<br>
+<br>
+
+<div class="buttons">
+
+    <a href="{{url_for('rfm_segmentation')}}"> <button type="button" class="btn success">  RFM Segmentation </button></a> &nbsp;&nbsp; <label style="color:black;font-size:18px;"> Segments the customer base into various groups on the basis of Recency, Frequency & Monetary values </label>
+<br>
+
+<button type="button" class="btn success">  Micro Segmentation </button> &nbsp;&nbsp; <label style="color:black;font-size:18px;"> Segments the customer base into various groups on the basis of demographic, behavioural as well as transactional data </label>
+
+<br>
+
+<button type="button" class="btn success"> Market Basket analysis </button> &nbsp;&nbsp; <label style="color:black;font-size:18px; line-height:0px"> Identify product affinity from the transactional data </label>
+<br>
+
+
+<button type="button" class="btn success">  Next Best offer </button> &nbsp;&nbsp; <label style="color:black;font-size:18px;"> Identify the next best product recommendation for each unique id </label>
+<br>
+
+
+<button type="button" class="btn success">  CLTV </button> &nbsp;&nbsp; <label style="color:black;font-size:18px;"> Quntify customer life time value of each unique id </label>
+<br>
+
+<button type="button" class="btn success"> Omni Channel </button> &nbsp;&nbsp; <label style="color:black;font-size:18px;line-height:0px"> Creates customized comunication through appropriate channels for each individual customer based on RFM,micro-segmentation,Market basket,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+    Next best offer,business priorities & in-built rules  </label> 
+<br>
+<br>  
+
+
+<a href="{{url_for('hello_world')}}"> <button type="button" class="btn success"> Go back to the main frame </button> </a> &nbsp;&nbsp; <label  style="color:black;font-size:18px;"> Go back to the main frame and select options to start analysis </label>
+
+</div>
+
+
+
+
+</body>
+</html>

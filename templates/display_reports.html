@@ -1,0 +1,59 @@
+<html>
+<head>
+
+</head>
+<body>
+
+<style>
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.alignimages
+{
+
+    margin-left: 100px;
+
+
+}
+
+.alignimages1
+{
+
+    margin-left: 100px;
+    margin-right: 50px;
+
+}
+
+
+</style>
+
+    
+
+{% if data == "single_image"  %}
+    <img src="../static/plots/segment_distribution.png" alt="segment distribution"  width="1300" height="600">
+{% elif data == "listimg" %}
+    <img src="..\\plots\\Segment_wise-Median_Frequency.png" alt="seg_median_freq" class="alignimages1" width="500"  height="400" >
+        
+        <img src="..\\plots\\Segment_wise-Median_Monetary.png" alt="seg_median_monetray"  width="500" height="400">
+    
+    <img src="..\\plots\\Segment_wise-Median_Recency.png" alt="seg_median_recency" class="center" width="500" height="400">
+
+
+{%  elif data == "tabdata" %}
+    <p> process df </p>
+{% else %}
+    <p> THIS IS ANOTHER DF </p>   
+
+{% endif %}
+
+</body>
+</html>
+
+
+
+    

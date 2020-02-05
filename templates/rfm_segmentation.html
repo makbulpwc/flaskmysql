@@ -1,0 +1,1088 @@
+<html>
+<head>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src = "../static/abc.json"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+</head>  
+
+<body>
+
+<style>
+body {background-color:white}
+    h2,h3   {color: black;}
+
+caption {
+  font-weight: bold;
+  text-align: center;
+  font-size: 20px;
+  color: black;
+  
+}
+
+input[type="submit"] {
+  width: 120px;
+  margin-left: 10px;
+
+}
+
+
+h1 {
+    border: 3px solid black;
+    border-radius: 10px;    
+    height: 95px;
+    font-size: 35px;
+    line-height: 95px; 
+    font-weight: bold;
+    margin-bottom: 0 !important;   
+    text-align: center;
+    padding-right: 200px;   
+    
+}
+
+
+img {
+  border-radius: 200px;
+  margin-left: 3px;
+  margin-bottom: 4px;
+  margin-top: 3px;
+  margin-right: 10px;
+
+}
+
+th{
+
+  text-align: center;
+
+}
+
+
+.success {
+  
+  border: none;
+  color:black;
+  padding: 15px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid black;
+  background-color:rgb(231,230,230);
+
+
+}
+
+</style>  
+
+<script type="text/javascript">
+
+var a = JSON.parse(data)
+
+var selectedtables = new Array();
+
+    function firsttable(l,m)
+    {   
+
+      var value = l.value;  
+     
+      var e = document.getElementById("firsttableid");
+      var strUser = e.options[e.selectedIndex].text;
+
+      console.log(strUser)
+     
+      if(selectedtables.includes(value))
+      {
+          
+          console.log('value already exist')
+          
+
+      }
+      else
+      {
+          
+           selectedtables.push(strUser);
+
+      }
+
+    
+
+      if(m == 10 || m == 11 || m == 12 || m == 13)
+      {
+
+          console.log('rfm table vallues')
+
+      }
+      else
+      {
+
+        thirdtabledata();
+
+
+      }
+
+      
+      switch (m) 
+      {
+          case 1:
+            var select = document.getElementById('coloft1');
+
+            break;
+          case 2:
+            var select = document.getElementById('coloft2');
+            break;
+          case 3:
+          var select = document.getElementById('coloft3');
+            break;
+          case 4:
+          var select = document.getElementById('colo4t4');
+            break;
+          case 5:
+          var select = document.getElementById('coloft5');
+            break;
+          case 10:
+          var select = document.getElementById('rfmtableoptions1');
+            break;
+          case 11:
+          var select = document.getElementById('rfmtableoptions2');
+          break;
+          case 12:
+          var select = document.getElementById('rfmtableoptions3');
+          break;
+          case 13:
+          var select = document.getElementById('rfmtableoptions4');
+          break;
+        
+       
+      }
+      
+      
+      select.options.length = 0;
+      if(value in a[0])
+      {
+         
+        var len = a[0][value];
+       
+        for(i in len)
+        { 
+        
+          select.options[select.options.length] = new Option(a[0][value][i],a[0][value][i]);  
+              
+        }
+
+      }
+       
+    } 
+
+
+    function secondttable(val,k)
+    {
+
+      var value1 = val.value; 
+      
+      
+
+      if(selectedtables.includes(value1))
+      {
+        console.log('exist')
+
+      }
+      else
+      {
+
+        selectedtables.push(value1);
+        
+
+      }
+      
+      thirdtabledata();
+      
+      
+
+      switch (k) 
+      {
+          case 1:
+          var select = document.getElementById('coloft21');
+            break;
+          case 2:
+            var select = document.getElementById('coloft22');
+            break;
+          case 3:
+          var select = document.getElementById('coloft23');
+            break;
+          case 4:
+          var select = document.getElementById('coloft24');
+            break;
+          case 5:
+          var select = document.getElementById('coloft25');
+            break;
+       
+      }
+
+      select.options.length = 0;
+
+
+       if(value1 in a[0])
+       {
+
+        len2 = a[0][value1].length;
+          
+          for(var j=0;j<len2;j++)
+          {
+             
+            // document.getElementById('coloft1').options[i] = new Option(a[0][selected_val][i],a[0][selected_val][i])
+            select.options[select.options.length] = new Option(a[0][value1][j],a[0][value1][j])
+            
+          }
+
+       }
+
+
+    }
+
+    function viewSource(){;
+    var source = "<html>";
+    source += document.getElementsByTagName('html')[0].innerHTML;
+    source += "</html>";
+    source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    source = "<pre>"+source+"</pre>";
+    sourceWindow = window.open('','Source of page','height=800,width=800,scrollbars=1,resizable=1');
+    sourceWindow.document.write(source);
+    sourceWindow.document.close(); 
+    if(window.focus) sourceWindow.focus();  
+  }  
+    
+console.log(selectedtables)
+
+function callthis(val1,m)
+{
+
+  var val1 = val1.value;
+  console.log(val1)
+  var select = document.getElementById('select11');
+
+
+  select.options.length = 0;
+
+
+if(val1 in a[0])
+{
+
+ len2 = a[0][val1].length;
+   
+   for(var j=0;j<len2;j++)
+   {
+      
+     // document.getElementById('coloft1').options[i] = new Option(a[0][selected_val][i],a[0][selected_val][i])
+     select.options[select.options.length] = new Option(a[0][val1][j],a[0][val1][j])
+     
+   }
+
+}
+  
+ 
+
+}
+
+function thirdtabledata()
+{
+
+  var select = document.getElementById('select1');
+  var select1 = document.getElementById('select2');
+  var select2 = document.getElementById('select3');
+  var select3 = document.getElementById('select4');
+  var select4 = document.getElementById('select5');
+  var select5 = document.getElementById('select6');
+  var select6 = document.getElementById('select7');
+  var select7 = document.getElementById('select8');
+
+
+// THIS IS FOR THE RECENCY,FREQUENCY AND MONETARY TABLE #######################
+  var select8 = document.getElementById('rfmtable1');
+  var select9 = document.getElementById('rfmtable2');
+  var select10 = document.getElementById('rfmtable3');
+  var select11 = document.getElementById('rfmtable4');
+
+
+
+
+  select.options.length = 0;
+  select1.options.length = 0;
+  select2.options.length = 0;
+  select3.options.length = 0;
+  select4.options.length = 0;
+  select5.options.length = 0;
+  select6.options.length = 0;
+  select7.options.length = 0;
+
+
+  select8.options.length = 0;
+  select9.options.length = 0;
+  select10.options.length = 0;
+  select11.options.length = 0;
+
+  
+   
+   for(var j=0;j<selectedtables.length;j++)
+   {
+      
+      console.log(selectedtables[j])
+     // document.getElementById('coloft1').options[i] = new Option(a[0][selected_val][i],a[0][selected_val][i])
+     select.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     select1.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     select2.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     select3.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     select4.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     select5.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     select6.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     select7.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+
+
+
+     select8.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     select9.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     select10.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     select11.options[select.options.length] = new Option(selectedtables[j],selectedtables[j])
+     
+   }
+
+}
+
+
+  </script>
+
+
+<div> <img src="../static/pwclogo.png" alt="pwc logo" width="130" height="85" align="left" /> <h1>  Master dataset creation</h1> </div>
+<!-- <h2 align=center> Create MASTER DATA SET </h2> -->
+
+<br>
+
+<form action="/tablevalues" method="POST" id='myform'>
+<a href="{{url_for('next_page')}}"> <button type="button" class="btn success" style="float: left;" > Back </button> </a>
+
+<button type="button" class="btn success" style="float: right;" onclick="viewSource()"> Go To Source Code </button>
+<br>
+<br>
+<br>
+<br>
+
+  <!-- This is a MASTER DATA SET TABLE -->
+<table  style="width:100%" border="1">
+    <tr >
+      <th align="center"> Table 1 </th>
+      <th>Join type</th> 
+      <th>Table 2</th>
+      <th>Column - Table 1</th>
+      <th>Condition Type</th>
+      <th>Column - Table 2</th>
+    </tr>
+    <tr align="center">
+      <td> 
+        <select id='firsttableid' name='firsttablename' onchange="firsttable(this,1)">
+          <option value = "" >  </option>
+            {% for key, value in data.items() %}  
+        <option value = {{key}} >{{ key }} </option>
+        {% endfor %}
+        </select> 
+    </td>
+    <td>
+      <select id='jointype1' name='jointype1'>
+        <option value = "" >  </option>
+        <option value='Inner Join'> Inner Join </option>
+        <option value ='Outer Join'> Outer Join </option>
+        <option value='left Join'> left Join </option>
+        <option value='Right Join'> Right Join </option>
+        </select > 
+    </td>
+    <td> 
+          <select id='2' name='21' onchange="secondttable(this,1)">
+            <option value = "" >  </option>  
+            {% for key, value in data.items() %}  
+        <option value = {{key}}>{{ key }} </option>
+        {% endfor %}
+        </select> 
+    </td>
+    <td> 
+        <select id='coloft1' name='coloft1'>
+         
+          </select> 
+
+        
+        </select> 
+    </td>
+    <td> 
+        <select id='join1' name='join1'>
+          <option value = "" >  </option>
+            <option value='='> = </option>
+            <option value='>'> > </option>
+            <option value='>='> >= </option>
+            <option value='<'> < </option>
+            <option value='<='> <= </option>
+            <option value = 'in'> in </option>
+        </select> 
+    </td>
+
+    <td>
+        <select id="coloft21" name='colot21'>
+          
+      
+        </select> 
+    </td>
+  </tr>
+  
+  <tr>
+  
+  </tr>
+
+
+
+    <tr align="center" border="1">  
+     <td> 
+      <select id='firsttableid1' name='firsttablename1' onchange="firsttable(this,2)">
+
+        <option value = "" >  </option>
+
+          {% for key, value in data.items() %}  
+      <option value = {{key}} >{{ key }} </option>
+      {% endfor %}
+      </select> 
+  </td>
+  <td>
+    <select id='jointype2' name='jointype2'>
+      <option value = "" >  </option>
+      <option value="Inner Join"> Inner Join </option>
+      <option value="Outer Join"> Outer Join </option>
+      <option value = "left Join"> left Join </option>
+      <option value="Right Join"> Right Join </option>
+      </select> 
+  </td>
+  <td> 
+        <select id='22' name='221' onchange="secondttable(this,2)">\
+          <option value=""></option>
+          {% for key, value in data.items() %}  
+      <option value = {{key}}> {{ key }} </option>
+      {% endfor %}
+      </select> 
+  </td>
+  <td> 
+      <select id='coloft2' name='colo2'>
+      </select> 
+  </td>
+  <td> 
+      <select id='join2' name='join2'>
+        <option value = "" >  </option>
+          <option value = '='> = </option>
+          <option value='>'> > </option>
+          <option value='>='> >= </option>
+          <option value = '<'> < </option>
+          <option value = '<='> <= </option>
+          <option value='in'> in </option>
+      </select> 
+  </td>
+
+  <td>
+      <select id="coloft22" name='colot22'>
+    
+      </select> 
+  </td>
+</tr>
+
+<tr>
+</tr>
+
+<tr align="center"> 
+  <td> 
+    <select id='firsttableid2' name='firsttablename2' onchange="firsttable(this,3)">
+      <option value = "" >  </option>
+        {% for key, value in data.items() %}  
+    <option value = {{key}} >{{ key }} </option>
+    {% endfor %}
+    </select> 
+</td>
+<td>
+  <select id='jointype3' name='jointype3'>
+    <option value = "" >  </option>
+    <option value="Inner Join"> Inner Join </option>
+    <option value="Outer Join"> Outer Join </option>
+    <option value = "left Join"> left Join </option>
+    <option value="Right Join"> Right Join </option>
+    </select> 
+</td>
+<td> 
+      <select id='23' name='231' onchange="secondttable(this,3)">
+        <option value="">  </option>
+        {% for key, value in data.items() %}  
+    <option value = {{key}}> {{ key }} </option>
+    {% endfor %}
+    </select> 
+</td>
+<td> 
+    <select id='coloft3' name='colo3'>
+    </select> 
+</td>
+<td> 
+    <select id='join3' name='join3'>
+      <option value = "" >  </option>
+      <option value = '='> = </option>
+      <option value='>'> > </option>
+      <option value='>='> >= </option>
+      <option value = '<'> < </option>
+      <option value = '<='> <= </option>
+      <option value='in'> in </option>
+
+    </select> 
+</td>
+
+<td>
+    <select id="coloft23" name='colot23'>
+  
+    </select> 
+</td>
+</tr>
+
+<tr>
+</tr>
+
+<tr align="center">
+  <td> 
+    <select id='firsttableid3' name='firsttablename3' onchange="firsttable(this,4)">
+      <option value = "" >  </option>
+        {% for key, value in data.items() %}  
+    <option value = {{key}} >{{ key }} </option>
+    {% endfor %}
+    </select> 
+</td>
+<td>
+  <select id='jointype4' name='jointype4'>
+    <option value = "" >  </option>
+    <option value="Inner Join"> Inner Join </option>
+    <option value="Outer Join"> Outer Join </option>
+    <option value = "left Join"> left Join </option>
+    <option value="Right Join"> Right Join </option>
+    </select> 
+</td>
+<td> 
+      <select id='24' name='241' onchange="secondttable(this,4)">
+        <option value=""></option>
+        {% for key, value in data.items() %}  
+    <option value = {{key}}> {{ key }} </option>
+    {% endfor %}
+    </select> 
+</td>
+<td> 
+    <select id='colo4t4' name='colo4'>
+    </select> 
+</td>
+<td> 
+    <select id='join4' name='join4'>
+      <option value = "" >  </option>
+      <option value = '='> = </option>
+      <option value='>'> > </option>
+      <option value='>='> >= </option>
+      <option value = '<'> < </option>
+      <option value = '<='> <= </option>
+      <option value='in'> in </option>
+
+    </select> 
+</td>
+
+<td>
+    <select id="coloft24" name='colot24'>
+  
+    </select> 
+</td>
+</tr>
+
+<tr>
+</tr>
+
+<tr align="center">
+  <td> 
+    <select id='firsttableid4' name='firsttablename4' onchange="firsttable(this,5)">
+      <option value = "" >  </option>
+        {% for key, value in data.items() %}  
+    <option value = {{key}} >{{ key }} </option>
+    {% endfor %}
+    </select> 
+</td>
+<td>
+  <select id='jointype5' name='jointype5'>
+    <option value = "" >  </option>
+    <option value="Inner Join"> Inner Join </option>
+    <option value="Outer Join"> Outer Join </option>
+    <option value = "left Join"> left Join </option>
+    <option value="Right Join"> Right Join </option>
+    </select> 
+</td>
+<td> 
+      <select id='25' name='251' onchange="secondttable(this,5)">
+        <option value=""></option>
+        {% for key, value in data.items() %}  
+    <option value = {{key}} > {{ key }} </option>
+    {% endfor %}
+    </select> 
+</td>
+<td> 
+    <select id='coloft5' name='colo5'>
+    </select> 
+</td>
+<td> 
+    <select id='join5' name='join5'>
+      <option value = "" >  </option>
+      <option value = '='> = </option>
+      <option value='>'> > </option>
+      <option value='>='> >= </option>
+      <option value = '<'> < </option>
+      <option value = '<='> <= </option>
+      <option value='in'> in </option>
+
+    </select> 
+</td>
+
+<td>
+    <select id="coloft25" name='colot25'>
+  
+    </select> 
+</td>
+</tr>
+
+</table>
+
+  <br>
+  <br>
+
+  
+  <!-- This is a UNIQUE IDENTIFIER TABLE -->
+
+  <table style="width:100%" border="1">
+    <tr>
+      <th>Column Neccessary</th>
+      <th> Type</th> 
+      <th>Table</th>
+      <th>Columns Mapping</th>
+      <th> Missing value Treatment</th>
+   
+      
+    </tr>
+    <tr align="center">
+      <td>   
+        
+        <p> <b> Unique Identifier </b> </p>
+        <p> <b> Recency </b> </p>
+        <p> <b> Freqency  </b> </p>
+        <p> <b> Monetary  </b> </p>
+        
+      </td>
+      
+      <td>
+
+        <p> <b> Unique Identifier </b> </p>
+        <p> <b> Last  </b> </p>
+        <p>  <b> Unique  </b> </p>
+        <p> <b> Sum  </b> </p>
+
+      </td>
+      <td>
+
+        <select id="rfmtable1" name='rfmtablename1' onchange="firsttable(this,10)" >
+            <option value=''>  </option>
+           
+        </select> 
+        <br>
+        <br>
+        <select id="rfmtable2" name='rfmtablename2' onchange="firsttable(this,11)">
+          <option value=''>  </option>
+          {% for key, value in data.items() %}  
+      <option value = {{key}}>{{ key }} </option>
+      {% endfor %}
+      </select> 
+      <br>
+      <br>
+
+      <select id="rfmtable3" name='rfmtablename3' onchange="firsttable(this,12)">
+        <option value="">  </option>
+        {% for key, value in data.items() %}  
+    <option value = {{key}}>{{ key }} </option>
+    {% endfor %}
+    </select> 
+    <br>
+    <br>
+
+    <select id="rfmtable4" name='rfmtablename4' onchange="firsttable(this,13)">
+      <option value=''>  </option>
+      {% for key, value in data.items() %}  
+  <option value = {{key}}>{{ key }} </option>
+  {% endfor %}
+  </select> 
+
+
+
+      </td>
+
+
+
+      <td>
+
+        <select id='rfmtableoptions1' name="rfmtableoptions1">
+          <option value="">  </option>
+           
+           
+        </select> 
+
+        <br>
+        <br>
+        <select id='rfmtableoptions2' name='rfmtableoptions2'>
+         
+          <option value="">  </option>
+         
+      </select> 
+      <br>
+      <br>
+      <select  id='rfmtableoptions3' name='rfmtableoptions3'>
+        <option value=''>  </option>
+      </select> 
+    <br>
+    <br>
+    <select id='rfmtableoptions4' name='rfmtableoptions4'>
+      
+      <option value=''>  </option>
+     
+  </select> 
+
+
+      </td>
+      <td>
+      <select id='miss_val1' name='miss_val1'>    
+
+        <option> Zero </option>
+        <option> Mean </option>
+        <option> Mode </option>
+        <option> Delete the Row </option>
+        <option> Median </option>
+        <option> Max </option>
+        <option> Min </option>
+    </select>        
+    <br>
+    <br>
+    <select id='miss_val2' name='miss_val2'>    
+      <option> Zero </option>
+      <option> Mean </option>
+      <option> Mode </option>
+      <option> Delete the Row </option>
+      <option> Median </option>
+      <option> Max </option>
+      <option> Min </option>
+  </select>    
+  <br>
+  <br>
+  <select id='miss_val3' name='miss_val3'>    
+    <option> Zero </option>
+    <option> Mean </option>
+    <option> Mode </option>
+    <option> Delete the Row </option>
+    <option> Median </option>
+    <option> Max </option>
+    <option> Min </option>
+</select>    
+<br>
+<br>
+<select id='miss_val4' name='miss_val4'>    
+  <option> Zero </option>
+  <option> Mean </option>
+  <option> Mode </option>
+  <option> Delete the Row </option>
+  <option> Median </option>
+  <option> Max </option>
+  <option> Min </option>
+</select>    
+      </td>
+
+    
+    </tr>
+    
+  </table>
+
+  <br>
+  <br>
+
+  <!-- This is a   TABLE -->
+  <table style="width:100%" border="1" id='filtertable' name='filter'>
+    <caption>  Filters in the data </caption>
+    <tr align="center">
+      <th>Tables</th>
+      <th> Columns</th>   
+      <th>Type Of Conditions</th>
+      <th>Values</th>
+    
+   
+    </tr>
+    <tr align="center">
+      <td>
+        <select id='select1' name='selectname1' onchange="callthis(this,20)">
+           
+
+            
+        </select> 
+      </td>
+      <td>
+        <select id='select11' name='selectname11'>
+          <option> </option>
+        </select> 
+      </td>
+      <td>
+        <select id='select12' name='selectname12'>
+          <option value=''> </option value=''>
+          <option value = '='> = </option>
+          <option value='>'> > </option>
+          <option value='>='> >= </option>
+          <option value = '<'> < </option>
+          <option value = '<='> <= </option>
+          <option value='in'> in </option>
+        </select> 
+      </td>
+      <td> <input type='text' id='inputf1' name='inputf1' /> </td>
+    </tr>
+    
+
+    <tr align="center">
+      <td>
+        <select id='select2' name='selectname2'>
+          <option value=''> </option>
+        </select> 
+      </td>
+      <td>
+        <select id='select21' name='selectname21'>
+            {% for key, value in data.items() %} 
+            <option value=''> </option>
+              {% for r in value %}
+                <option value = {{r}}>{{ r }} </option>
+              {% endfor %}
+                
+        {% endfor %}
+        </select> 
+      </td>
+      <td>
+        <select id='select22' name='selectname22'>
+          <option value=''> </option>
+          <option value = '='> = </option>
+          <option value='>'> > </option>
+          <option value='>='> >= </option>
+          <option value = '<'> < </option>
+          <option value = '<='> <= </option>
+          <option value='in'> in </option>
+        </select> 
+      </td>
+      <td> <input type='text' id='inputf2' name='inputf2' /> </td>
+    </tr>
+    <tr align="center">
+      <td>
+        <select id='select3' name='selectname3'>
+            <option value=''>  </option>
+           
+        </select> 
+      </td>
+      <td>
+        <select id='select31' name='selectname31'>
+            {% for key, value in data.items() %} 
+            <option value=''>  </option>
+              {% for r in value %}
+                <option value = {{r}}>{{ r }} </option>
+              {% endfor %}
+                
+        {% endfor %}
+        </select> 
+      </td>
+      <td>
+        <select id='select32' name='selectname32'>
+          <option value=''> </option>
+          <option value = '='> = </option>
+          <option value='>'> > </option>
+          <option value='>='> >= </option>
+          <option value = '<'> < </option>
+          <option value = '<='> <= </option>
+          <option value='in'> in </option>
+        </select> 
+      </td>
+      <td> <input type='text' id='inputf3' name='inputf3' /> </td>
+    </tr>
+    <tr align="center">
+      <td>
+        <select id='select4' name='selectname4'>
+            <option value=''>  </option>
+          
+        </select> 
+      </td>
+      <td>
+        <select id='select41' name='selectname41'>
+            {% for key, value in data.items() %} 
+            <option value=''>  </option>
+              {% for r in value %}
+                <option value = {{r}}>{{ r }} </option>
+              {% endfor %}
+                
+        {% endfor %}
+        </select> 
+      </td>
+      <td>
+        <select id='select42' name='selectname42'>
+          <option value=''> </option>
+          <option value = '='> = </option>
+          <option value='>'> > </option>
+          <option value='>='> >= </option>
+          <option value = '<'> < </option>
+          <option value = '<='> <= </option>
+          <option value='in'> in </option>
+        </select> 
+      </td>
+      <td> <input type='text' id='inputf4' name='inputf4' /> </td>
+    </tr>
+    <tr align="center">
+      <td>
+        <select id='select5' name='selectname5'>
+            <option value=''>  </option>
+           
+        </select> 
+      </td>
+      <td>
+        <select id='select51' name='selectname51'>
+            {% for key, value in data.items() %} 
+            <option value=''>  </option>
+              {% for r in value %}
+                <option value = {{r}}>{{ r }} </option>
+              {% endfor %}
+                
+        {% endfor %}
+        </select> 
+      </td>
+      <td>
+        <select id='select52' name='selectname52'>
+          <option value=''> </option>
+          <option value = '='> = </option>
+          <option value='>'> > </option>
+          <option value='>='> >= </option>
+          <option value = '<'> < </option>
+          <option value = '<='> <= </option>
+          <option value='in'> in </option>
+        </select> 
+      </td>
+      <td> <input type='text' id='inputf5' name='inputf5' /> </td>
+    </tr>
+    <tr align="center">
+      <td>
+        <select id='select6' name='selectname6'>
+            <option value=''>  </option>
+           
+        </select> 
+      </td>
+      <td>
+        <select id='select61' name='selectname61'>
+            {% for key, value in data.items() %} 
+            <option value=''>  </option>
+              {% for r in value %}
+                <option value = {{r}}>{{ r }} </option>
+              {% endfor %}
+                
+        {% endfor %}
+        </select> 
+      </td>
+      <td>
+        <select id='select62' name='selectname62'>
+          <option value=''> </option>
+          <option value = '='> = </option>
+          <option value='>'> > </option>
+          <option value='>='> >= </option>
+          <option value = '<'> < </option>
+          <option value = '<='> <= </option>
+          <option value='in'> in </option>
+
+        </select> 
+      </td>
+      <td> <input type='text' id='inputf6' name='inputf6' /> </td>
+    </tr>
+    <tr align="center">
+      <td>
+        <select id='select7' name='selectname7'>
+            <option value=''>  </option>
+          
+        </select> 
+      </td>
+      <td>
+        <select id='select71' name='selectname71'>
+            {% for key, value in data.items() %} 
+            <option value="">  </option>
+              {% for r in value %}
+                <option value = {{r}}>{{ r }} </option>
+              {% endfor %}
+                
+        {% endfor %}
+        </select> 
+      </td>
+      <td>
+        <select id='select72' name='selectname72'>
+          <option value=''> </option>
+      <option value = '='> = </option>
+      <option value='>'> > </option>
+      <option value='>='> >= </option>
+      <option value = '<'> < </option>
+      <option value = '<='> <= </option>
+      <option value='in'> in </option>
+
+        </select> 
+      </td>
+      <td> <input type='text' id='inputf7' name='inputf7' /> </td>
+    </tr>
+    <tr align="center">
+      <td>
+        <select id='select8' name='selectname8'>
+            <option> Select </option>
+           
+        </select> 
+      </td>
+      <td>
+        <select id='select81' name='selectname81'>
+            {% for key, value in data.items() %} 
+            <option value=''>  </option>
+              {% for r in value %}
+                <option value = {{r}}>{{ r }} </option>
+              {% endfor %}
+                
+        {% endfor %}
+        </select> 
+      </td>
+      <td>
+        <select id='select82' name='selectname82'>
+          <option value=''> </option>
+            <option value = '='> = </option>
+          <option value='>'> > </option>
+          <option value='>='> >= </option>
+          <option value = '<'> < </option>
+          <option value = '<='> <= </option>
+          <option value='in'> in </option>
+        </select> 
+      </td>
+      <td> <input type='text' id='inputf8' name='inputf8' /> </td>
+    </tr>
+  </table>
+
+
+  <br>
+  <br>
+ <div align=center> <input type="submit" class = "btn success" value="Submit" /></div>
+
+ <br>
+ <br>
+
+<div align=center><a href="{{url_for('allreports')}}"> <button type="button" class="btn success"  style="float: center;"> View Reports </button> </a> </div>
+
+</form>
+
+</body>
+
+</html>
