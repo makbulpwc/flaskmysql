@@ -1,10 +1,100 @@
+
 <html>
 <head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   
+        <META HTTP-EQUIV="Cache-Control", CONTENT="no-store, no-cache, must-revalidate">
+            <META HTTP-EQUIV="Cache-Control", CONTENT="no-Cache">
+            <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+
+<script type="text/javascript">
+
+
+var a  = Math.random();
+console.log(a)
+
+
+function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+
+</script>
+
+
 
 </head>
 <body>
 
 <style>
+
+h1 {
+    border: 3px solid black;
+    border-radius: 10px;    
+    height: 95px;
+    font-size: 35px;
+    line-height: 95px; 
+    font-weight: bold;
+    margin-bottom: 0 !important;   
+    text-align: center;
+    padding-right: 200px;   
+    
+}
+
+
+img {
+  border-radius: 200px;
+  margin-left: 3px;
+  margin-bottom: 4px;
+  margin-top: 3px;
+  margin-right: 10px;
+
+}
+
+.success {
+  
+  border: none;
+  color:black;
+  padding: 15px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid black;
+  background-color:rgb(231,230,230);
+
+
+}
 
 .center {
   display: block;
@@ -32,28 +122,109 @@
 
 </style>
 
+
+
+
+
     
 
 {% if data == "single_image"  %}
-    <img src="../static/plots/segment_distribution.png" alt="segment distribution"  width="1300" height="600">
+        <img src="./static/plots/segment_distribution.png" alt="segment distribution"  width="1300" height="600">
 {% elif data == "listimg" %}
-    <img src="..\\plots\\Segment_wise-Median_Frequency.png" alt="seg_median_freq" class="alignimages1" width="500"  height="400" >
-        
-        <img src="..\\plots\\Segment_wise-Median_Monetary.png" alt="seg_median_monetray"  width="500" height="400">
-    
-    <img src="..\\plots\\Segment_wise-Median_Recency.png" alt="seg_median_recency" class="center" width="500" height="400">
+    <img src="./static/plots/Segment_wise-Median_Frequency.png" alt="seg_median_freq" class="alignimages1" width="500"  height="400" >
+
+        <img src="./static/plots/Segment_wise-Median_Monetary.png" alt="seg_median_monetray"  width="500" height="400">
+
+    <img src="./static/plots/Segment_wise-Median_Recency.png" alt="seg_median_recency" class="center" width="500" height="400">
+
 
 
 {%  elif data == "tabdata" %}
-    <p> process df </p>
+
+<div> <img src="./static/pwclogo.png" alt="pwc logo" width="130" height="85" align="left"> <h1>  RFM Data </h1> </div>
+
+
+<br>
+
+<div align="right"> <button type="button"   class="btn success" style="float:center" onclick="exportTableToExcel('rfmdata', 'rfm_data')"> Exports data </button> </div>
+
+<br>
+
+<table border="1" width="100%" id='rfmdata'>
+    <thead>
+      <tr style="text-align:center">
+        
+        <th>Unique Identifier</th>
+        <th> Segment </th>
+        <th>Median Monetary</th>
+        <th>Median Frequency</th>
+        <th> Median Recency</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for key,value in dataframe_display.iterrows() %} 
+        
+        <tr style="text-align:center">
+            {% for key2 in value %}
+                 <td> {{ key2 }} </td>  
+                 {% endfor %}
+        </tr>  
+             {% endfor %}  
+        
+    </tbody>
+  </table>
+
 {% else %}
-    <p> THIS IS ANOTHER DF </p>   
+    
+
+
+<div> <img src="./static/pwclogo.png" alt="pwc logo" width="130" height="85" align="left"> <h1>  Unique Identifier Data  </h1> </div>
+<br>
+<div align="right"> <button align="right" type="button"  class="btn success" style="float:center"> Exports data </button> </div>
+
+<br>
+<br>
+
+<table border="1" width="100%">
+    <thead>
+      <tr style="text-align:center">
+        
+        <th>Unique Identifier</th>
+        <th> Name </th>
+        <th>Frequency</th>
+        <th>Monetary</th>
+        <th>Recency</th>
+
+        <th>Segment</th>
+        <th>Median Frequency</th>
+        <th>Median Monetary</th>
+        <th>Median Recency</th>
+        
+
+
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for key,value in dataframe_display.iterrows() %} 
+        
+        <tr style="text-align:center">
+            {% for key2 in value %}
+                 <td> {{ key2 }} </td>  
+                 {% endfor %}
+        </tr>  
+             {% endfor %}  
+        
+    
+    </tbody>
+  </table>
 
 {% endif %}
 
-</body>
-</html>
+</div>
 
 
 
-    
+
+    </body></html>

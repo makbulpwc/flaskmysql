@@ -1,13 +1,13 @@
 from flask import Flask,render_template,request,redirect,jsonify
 from werkzeug import secure_filename
-import psycopg2
+#import psycopg2
 import copy
-import MySQLdb
+#import MySQLdb
 import json
 import mysql.connector
 from collections import defaultdict
 import pandas as pd
-import pandasql as ps
+#import pandasql as ps
 import warnings
 import re
 import datetime as dt
@@ -307,9 +307,9 @@ def tabledata():
             elif type_imp=='Min':
                 df[col_name]=df[col_name].fillna(df[col_name].min())
             return df
-        master_data=pd.read_csv(".\\static\\test.csv")
+        master_data=pd.read_csv("./static/test.csv")
         def crm(master_data,f_bins,m_bins,r_bins,uid_impute,frequency_impute,monetary_impute,recency_impute):
-            rules=pd.read_excel(".\\input\\rules_rfm.xlsx")
+            rules=pd.read_excel("./input/rules_rfm.xlsx")
             rules['concat_tag']=rules['Recency']+','+rules['Frequency']+','+rules['Monetary']
             rule_dict=rules.set_index('concat_tag').to_dict()
             #rule_dict['tag']
@@ -402,7 +402,7 @@ def tabledata():
                          );
             ax.set_ylabel("Recency Score", fontsize=12
                          );
-            plt.savefig(".\\static\\plots\\rm_map.png")
+            plt.savefig("./static/plots/rm_map.png")
             #plt.show()
         
         
@@ -423,7 +423,7 @@ def tabledata():
                          );
             ax.set_ylabel("Frequency Score", fontsize=12
                          );
-            plt.savefig(".\\static\\plots\\fm_map.png")
+            plt.savefig("./static/plots/fm_map.png")
         
             #plt.show()
         
@@ -443,7 +443,7 @@ def tabledata():
                          );
             ax.set_ylabel("Recency Score", fontsize=12
                          );
-            plt.savefig(".\\static\\plots\\rf_map.png")
+            plt.savefig("./static/plots/rf_map.png")
         
             #plt.show()
         
@@ -533,7 +533,7 @@ def tabledata():
             ax.spines['top'].set_visible(False)
             ax.spines['right'].set_visible(False)
         
-            plt.savefig(".\\static\\plots\\Segment_wise-Median_Monetary.png")
+            plt.savefig("./static/plots/Segment_wise-Median_Monetary.png")
         
             #plt.show()
         
@@ -555,7 +555,7 @@ def tabledata():
             ax.get_legend().remove()
             ax.spines['top'].set_visible(False)
             ax.spines['right'].set_visible(False)
-            plt.savefig(".\\static\\plots\\Segment_wise-Median_Recency.png")
+            plt.savefig("./static/plots/Segment_wise-Median_Recency.png")
         
         
             #plt.show()
@@ -578,7 +578,7 @@ def tabledata():
             ax.get_legend().remove()
             ax.spines['top'].set_visible(False)
             ax.spines['right'].set_visible(False)
-            plt.savefig(".\\static\\plots\\Segment_wise-Median_Frequency.png")
+            plt.savefig("./static/plots/Segment_wise-Median_Frequency.png")
         
             #plt.show()
         
@@ -596,7 +596,7 @@ def tabledata():
                           );
             ax.set_ylabel("Recency Score", fontsize=12
                           );
-            plt.savefig(".\\static\\plots\\rf_map_median.png")
+            plt.savefig("./static/plots/rf_map_median.png")
         
             #plt.show()
         
@@ -615,7 +615,7 @@ def tabledata():
                           );
             ax.set_ylabel("Monetary Score", fontsize=12
                           );
-            plt.savefig(".\\static\\plots\\fm_map_median.png")
+            plt.savefig("./static/plots/fm_map_median.png")
         
             #plt.show()
         
@@ -634,7 +634,7 @@ def tabledata():
                           );
             ax.set_ylabel("Monetary Score", fontsize=12
                           );
-            plt.savefig(".\\static\\plots\\rm_map_median.png")
+            plt.savefig("./static/plots/rm_map_median.png")
         
             #plt.show()
         
@@ -649,7 +649,7 @@ def tabledata():
      
         a.to_csv('data.csv');
         print("FILLED DATA",dataframe_uni)
-
+        b.to_csv('rfm.csv')
 
         with open('templates/htmlpart.html','w+') as f:
             f.write(htmlpart)
@@ -665,22 +665,26 @@ def allreports():
 def displayallreports():
 
 
-    df = pd.read_csv('data.csv');
-    dataframe_uni = df.to_dict();
+    #df = pd.read_csv('data.csv');
+    #dataframe_uni = df.to_dict();
+    df = pd.DataFrame()
+    # dataframe_uni = df.to_dict();
+    reports = request.args.get('deptname');
+    reports = request.args.get('deptname');
+    reports = request.args.get('deptname');
+    reports = request.args.get('deptname');
+
+    print(reports)
+    if(reports == "singledata"):
+        df = pd.read_csv('data.csv')
+        print (df)
+    elif(reports == "tabdata"):
+        df = pd.read_csv('rfm.csv')
+        print (df)
+
+    return  render_template('display_reports.html',data=reports,dataframe_display=df);    
     
-    
-
-    if request.method == 'GET':
-
-        reports = request.args.get('deptname');
-        reports = request.args.get('deptname');
-        reports = request.args.get('deptname');
-        reports = request.args.get('deptname')
-           
-
-    return  render_template('display_reports.html',data=reports,dataframe_display=dataframe_uni)     
-
 
 if __name__ == '__main__':
    app.debug = True
-   app.run()
+   app.run(host='0.0.0.0')
