@@ -254,7 +254,8 @@ def tabledata():
         
         s = re.sub(r'and \. \(\).*?(?=group)', '', s2, flags=re.S)
         print("query",s)
-
+        with open('./templates/queries','a+') as f:
+            f.write(s)
         dbtype = 'MYSQL'
         dbuser = 'root'
         dbpw = '12345678'
@@ -272,7 +273,7 @@ def tabledata():
         a = cursor.fetchall()
         print ('a',a)
         df = pd.DataFrame(a, columns =['Customer','Recency', 'Frequency', 'Monetory']) 
-        df.to_csv('.\\static\\test.csv', index=False)
+        df.to_csv('./static/test.csv', index=False)
         print(str(df))
 # =============================================================================
 #         if df.empty == True:
